@@ -1,4 +1,3 @@
-
 import numpy as np
 
 from groupy.garray.garray import GArray
@@ -6,15 +5,15 @@ from groupy.garray.garray import GArray
 
 class Z2Array(GArray):
 
-    parameterizations = ['int']
+    parameterizations = ["int"]
     _left_actions = {}
     _reparameterizations = {}
-    _g_shapes = {'int': (2,)}
-    _group_name = 'Z2'
+    _g_shapes = {"int": (2,)}
+    _group_name = "Z2"
 
-    def __init__(self, data, p='int'):
+    def __init__(self, data, p="int"):
         data = np.asarray(data)
-        assert data.dtype == np.int
+        assert data.dtype == np.int64
         self._left_actions[Z2Array] = self.__class__.z2_composition
         super(Z2Array, self).__init__(data, p)
 
@@ -25,15 +24,15 @@ class Z2Array(GArray):
         return Z2Array(-self.data)
 
     def __repr__(self):
-        return 'Z2\n' + self.data.__repr__()
+        return "Z2\n" + self.data.__repr__()
 
     def reparameterize(self, p):
-        assert p == 'int'
+        assert p == "int"
         return self
 
 
 def identity(shape=()):
-    e = Z2Array(np.zeros(shape + (2,), dtype=np.int), 'int')
+    e = Z2Array(np.zeros(shape + (2,), dtype=np.int64), "int")
     return e
 
 
@@ -41,17 +40,17 @@ def rand(minu, maxu, minv, maxv, size=()):
     data = np.zeros(size + (2,), dtype=np.int64)
     data[..., 0] = np.random.randint(minu, maxu, size)
     data[..., 1] = np.random.randint(minv, maxv, size)
-    return Z2Array(data=data, p='int')
+    return Z2Array(data=data, p="int")
 
 
 def u_range(start=-1, stop=2, step=1):
-    m = np.zeros((stop - start, 2), dtype=np.int)
+    m = np.zeros((stop - start, 2), dtype=np.int64)
     m[:, 0] = np.arange(start, stop, step)
     return Z2Array(m)
 
 
 def v_range(start=-1, stop=2, step=1):
-    m = np.zeros((stop - start, 2), dtype=np.int)
+    m = np.zeros((stop - start, 2), dtype=np.int64)
     m[:, 1] = np.arange(start, stop, step)
     return Z2Array(m)
 

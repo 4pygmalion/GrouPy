@@ -1,4 +1,3 @@
-
 # Code for generating indices used in G-convolutions for various groups G.
 # The indices created by these functions are used to rotate and flip filters on the plane or on a group.
 # These indices depend only on the filter size, so they are created only once at the beginning of training.
@@ -23,7 +22,7 @@ def make_c4_z2_indices(ksize):
         uv = f.left_translation_indices(C4[:, None, None, None])
     r = np.zeros(uv.shape[:-1] + (1,))
     ruv = np.c_[r, uv]
-    return ruv.astype('int32')
+    return ruv.astype("int32")
 
 
 def make_c4_p4_indices(ksize):
@@ -34,7 +33,7 @@ def make_c4_p4_indices(ksize):
         li = f.left_translation_indices(C4_halfshift[:, None, None, None])
     else:
         li = f.left_translation_indices(C4[:, None, None, None])
-    return li.astype('int32')
+    return li.astype("int32")
 
 
 def make_d4_z2_indices(ksize):
@@ -44,7 +43,7 @@ def make_d4_z2_indices(ksize):
     uv = f.left_translation_indices(D4.flatten()[:, None, None, None])
     mr = np.zeros(uv.shape[:-1] + (1,))
     mruv = np.c_[mr, uv]
-    return mruv.astype('int32')
+    return mruv.astype("int32")
 
 
 def make_d4_p4m_indices(ksize):
@@ -52,7 +51,7 @@ def make_d4_p4m_indices(ksize):
     x = np.random.randn(8, ksize, ksize)
     f = P4MFuncArray(v=x)
     li = f.left_translation_indices(D4.flatten()[:, None, None, None])
-    return li.astype('int32')
+    return li.astype("int32")
 
 
 def flatten_indices(inds):
